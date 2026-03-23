@@ -26,6 +26,11 @@ connection: &ublox-x20p
               38400n81,local,nobreak
 ```
 
+```bash
+sudo systemctl restart ser2net.service
+```
+This service fails to autostart probably because the device is not yet available...
+
 ## Extra USB UART issues on linux 
 https://github.com/aussierobots/ublox_dgnss/issues/48
 
@@ -42,3 +47,26 @@ Permanent fix:
 ```bash
 sudo cp 99-ublox-ftdi.rules /etc/udev/rules.d/
 ```
+
+
+## RTK Corrections
+http://rtk2go.com:2101/SNIP::MOUNTPT?baseName=Bobcat58504&tk=q7dc88eev2qzmSSkuMb6
+
+
+## Minicom
+```bash
+minicom -b 38400 -D /dev/ttyUSB0 -C minicom-log
+```
+
+
+## X20P Messages
+### GGA
+**Quality**
+
+The `$GNGGA` quality field is the 6th comma-delimited value.
+
+| Value | Description |
+|-------|-------------|
+| 1 | Standalone |
+| 4 | Fixed |
+| 5 | Float |
